@@ -6,3 +6,6 @@
 **/*.iml
 .env
 *.log
+results/agent-local/
+results/local/
+results/local-runnable/
