@@ -1,0 +1,67 @@
+{
+  "experiment_type": "lexical_layout_proxy_NOT_AI_agent",
+  "measured_at_utc": "2026-11-23T06:48:31.179256+00:00",
+  "source_sha256": "001ec0f47b659cc23692c0d556f87814ba561377c180dcd12e41b21b427de104",
+  "platform": "Linux-7.0.0-1020-azure-x86_64-with-glibc2.43",
+  "python": "3.12.16",
+  "seed": 20261123,
+  "repeats_per_query": 100,
+  "queries": [
+    "cancel",
+    "quantity",
+    "productName",
+    "Order"
+  ],
+  "profiles": [
+    {
+      "profile": "ai_native",
+      "median_of_query_medians_ms": 0.436306,
+      "files_opened": 7,
+      "bytes_read": 6531,
+      "query_count": 4
+    },
+    {
+      "profile": "ddd_context",
+      "median_of_query_medians_ms": 0.562917,
+      "files_opened": 7,
+      "bytes_read": 6531,
+      "query_count": 4
+    },
+    {
+      "profile": "fsd_frontend",
+      "median_of_query_medians_ms": 0.559253,
+      "files_opened": 7,
+      "bytes_read": 6531,
+      "query_count": 4
+    },
+    {
+      "profile": "hexagonal",
+      "median_of_query_medians_ms": 0.686804,
+      "files_opened": 7,
+      "bytes_read": 6531,
+      "query_count": 4
+    },
+    {
+      "profile": "layered",
+      "median_of_query_medians_ms": 0.464226,
+      "files_opened": 7,
+      "bytes_read": 6531,
+      "query_count": 4
+    },
+    {
+      "profile": "modular_monolith",
+      "median_of_query_medians_ms": 0.593199,
+      "files_opened": 7,
+      "bytes_read": 6531,
+      "query_count": 4
+    },
+    {
+      "profile": "vertical_slice",
+      "median_of_query_medians_ms": 0.468887,
+      "files_opened": 7,
+      "bytes_read": 6531,
+      "query_count": 4
+    }
+  ],
+  "warning": "Paths-only synthetic proxies; not full implementations. Differences are not AI-agent improvements."
+}
