@@ -75,3 +75,17 @@ python3 scripts/benchmark_runnable.py --repeats 100 --output results/local-runna
 - [Portfolio text (Korean/English)](docs/PORTFOLIO_SNIPPET.md)
 - [Architecture decision record](docs/ADR-0001-domain-colocation.md)
 - [Agent instructions](AGENTS.md)
+
+## Real AI source-discovery pilot (opt-in, not yet executed)
+
+The repository includes an isolated, read-only Codex CLI trial runner. It records **real** model input/output tokens, elapsed seconds, command/tool calls, and precision/recall against pre-registered minimum code-change loci.
+
+```bash
+# Free dry run: prepares independent fixtures; does not call a model.
+python3 scripts/agent_discovery_trial.py --profiles layered ai_native --runs 3
+
+# Requires locally authenticated Codex CLI and can consume usage:
+python3 scripts/agent_discovery_trial.py --execute --model YOUR_CODEX_MODEL --profiles layered ai_native ddd hexagonal vertical_slice modular_monolith fsd_frontend --runs 3
+```
+
+See [Codex experimental harness and safety notes](docs/AGENT_DISCOVERY_BENCHMARK.md). The read-only file-selection pilot is **distinct from autonomous code-edit success**. Local traces are gitignored; no AI metrics have been published yet.
