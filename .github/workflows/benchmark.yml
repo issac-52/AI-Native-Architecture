@@ -1,0 +1,42 @@
+name: Measured architecture layout benchmark
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'baseline/backend/src/**'
+      - 'baseline/frontend/src/**'
+      - 'scripts/benchmark_discovery.py'
+      - 'benchmarks/**'
+      - '.github/workflows/benchmark.yml'
+permissions:
+  contents: write
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit tests
+        run: python3 -m unittest discover -s benchmarks/tests -v
+      - name: Measure & generate reproducible CSV/JSON/SVG/Markdown
+        run: python3 scripts/benchmark_discovery.py --repeats 100 --output results/latest
+      - uses: actions/upload-artifact@v4
+        with:
+          name: measured-layout-results
+          path: results/latest/
+      - name: Save results in repository on main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        continue-on-error: true
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/latest/
+          git diff --cached --quiet && exit 0
+          git commit -m "data: record measured layout microbenchmark [skip ci]"
+          git push
