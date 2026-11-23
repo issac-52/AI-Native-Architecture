@@ -1,3 +1,5 @@
 pluginManagement { repositories { gradlePluginPortal(); mavenCentral() } }
 rootProject.name = 'ai-native-architecture'
-include 'apps:api', 'baseline:backend'
+include 'apps:api', 'baseline:backend',
+        'variants:ddd', 'variants:hexagonal',
+        'variants:vertical-slice', 'variants:modular-monolith'

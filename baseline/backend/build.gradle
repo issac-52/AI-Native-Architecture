@@ -4,8 +4,9 @@ plugins {
     id 'io.spring.dependency-management'
 }
 group = 'lab.baseline'
-version = '0.1.0'
+version = '0.2.0'
 java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }
+sourceSets.test.java.srcDir '../../benchmarks/contract-tests/src/test/java'
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

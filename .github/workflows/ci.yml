@@ -1,10 +1,16 @@
 name: Verify architecture variants
 on:
   push:
+    paths-ignore:
+      - 'results/**'
+      - '**/*.md'
   pull_request:
+permissions:
+  contents: read
 jobs:
-  java-tests:
+  java-contract-tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -14,9 +20,23 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.14'
-      - run: gradle :baseline:backend:test :apps:api:test --no-daemon
+      - name: Shared order HTTP contract tests across 6 backend layouts
+        run: >-
+          gradle :baseline:backend:test :apps:api:test
+          :variants:ddd:test :variants:hexagonal:test
+          :variants:vertical-slice:test :variants:modular-monolith:test
+          --no-daemon
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: junit-architecture-contract-reports
+          path: |
+            baseline/backend/build/test-results/test/*.xml
+            apps/api/build/test-results/test/*.xml
+            variants/**/build/test-results/test/*.xml
   web-builds-and-structure:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -26,7 +46,12 @@ jobs:
         with:
           python-version: '3.12'
       - run: python3 scripts/validate_architecture.py
-      - run: npm install && npm run build
+      - name: AI-native React build
+        run: npm install && npm run build
         working-directory: apps/web
-      - run: npm install && npm run build
+      - name: Conventional React build
+        run: npm install && npm run build
         working-directory: baseline/frontend
+      - name: Feature-Sliced React build
+        run: npm install && npm run build
+        working-directory: variants/fsd-web

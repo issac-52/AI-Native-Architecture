@@ -4,11 +4,12 @@ plugins {
     id 'io.spring.dependency-management'
 }
 group = 'lab.ainative'
-version = '0.1.0'
+version = '0.2.0'
 java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }
 sourceSets {
     main.java.srcDir '../../domains/order/backend/src/main/java'
     test.java.srcDir '../../domains/order/tests/java'
+    test.java.srcDir '../../benchmarks/contract-tests/src/test/java'
 }
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
