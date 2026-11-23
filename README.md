@@ -1,59 +1,77 @@
 # AI-Native Architecture Lab
 
-An **experimental**, not yet validated, comparison between conventional layer-oriented and business-domain-centered FE/BE source organization for autonomous coding agents.
+> **Research prototype (2026-11-23)** — Can autonomous coding agents complete changes more accurately and cheaply when code is organized by business domain? The AI-agent hypothesis is **not yet measured**.
 
-## Hypothesis
-Keeping a feature's frontend, backend, contract, specifications and tests close together may improve an AI agent's task completion, navigation efficiency and change isolation. The outcome must be measured.
+## Runnable implementations
 
-| Variant | Layout | Backend | Frontend |
-|---|---|---|---|
-| A: conventional | `baseline/backend` (controller/service/repository) and `baseline/frontend` | Spring Boot | React/Vite |
-| B: AI-native | `domains/order/{backend,frontend,contract,specification,tests}` with `apps/{api,web}` entry points | Spring Boot | React/Vite |
+Six independent Java 21 / Spring Boot applications expose the same in-memory orders HTTP contract, with shared JUnit acceptance tests:
 
-Both implement the **same** in-memory order create/list/cancel API. No payment, inventory, authentication or durable storage.
+| Backend organization | Gradle run command | Port |
+|---|---|---:|
+| Layered | `gradle :baseline:backend:bootRun` | 8081 |
+| AI-Native Domain Co-location | `gradle :apps:api:bootRun` | 8080 |
+| DDD-inspired Aggregate | `gradle :variants:ddd:bootRun` | 8082 |
+| Hexagonal / Ports & Adapters | `gradle :variants:hexagonal:bootRun` | 8083 |
+| Vertical Slice | `gradle :variants:vertical-slice:bootRun` | 8084 |
+| Modular Monolith | `gradle :variants:modular-monolith:bootRun` | 8085 |
 
-## Prerequisites
-JDK 21, Gradle 8.14+ installed on PATH, Node 22+, npm, Python 3.10+. (Gradle wrapper not bundled.)
+Three React/Vite frontends: `baseline/frontend` (Layered), `apps/web` (AI-Native) and `variants/fsd-web` (FSD). From each directory, run `npm install && npm run dev`.
 
-## Run
-**A:** `gradle :baseline:backend:bootRun` (port 8081), then `cd baseline/frontend && npm install && npm run dev` (http://localhost:5174).
+**Prerequisites:** JDK 21, Gradle 8.14+ on PATH, Node.js 22+, npm, Python 3.10+. The Gradle wrapper is not bundled. Servers store all state in memory.
 
-**B:** `gradle :apps:api:bootRun` (port 8080), then `cd apps/web && npm install && npm run dev` (http://localhost:5173).
+All backends support:
+- `POST /api/orders` -> 201 with order
+- `GET /api/orders` -> 200 with sorted orders
+- `POST /api/orders/{id}/cancel` -> 200, idempotent cancel
+- Invalid create -> 400; non-existent ID -> 404
 
-Each server stores orders in memory and resets on restart.
+Details: [Runnable implementations & commands](docs/IMPLEMENTATIONS.md), [architecture comparability](docs/ARCHITECTURE_COMPARISON.md).
 
-## Validate
+## Test commands
+
 ```bash
+gradle :baseline:backend:test :apps:api:test :variants:ddd:test :variants:hexagonal:test :variants:vertical-slice:test :variants:modular-monolith:test
 python3 scripts/validate_architecture.py
-gradle :baseline:backend:test :apps:api:test
+python3 scripts/validate_boundaries.py
+python3 -m unittest discover -s benchmarks/tests -v
 (cd baseline/frontend && npm install && npm run build)
 (cd apps/web && npm install && npm run build)
+(cd variants/fsd-web && npm install && npm run build)
 ```
 
-See [architecture](docs/ARCHITECTURE.md), [experiment protocol](docs/EXPERIMENT.md), [decision record](docs/ADR-0001-domain-colocation.md), [task catalog](experiments/tasks.md), [results CSV](experiments/results-template.csv) and [agent rules](AGENTS.md).
+CI runs the shared HTTP contract suite for six backend implementations and builds all three React apps. See [CI workflows](.github/workflows/ci.yml).
 
-**Important:** this is a small single-domain proof of concept. Neither layout has measured AI performance results yet.
+## Experiment data — two distinctly different datasets
 
-## Seven-layout measured discovery benchmark
+### 1. Byte-identical source files, seven synthetic path layouts
 
-The [benchmark suite](benchmarks/README.md) generates the **same seven files (same bytes) in seven different layout proxies**: layered, vertical slice, DDD context, hexagonal, FSD frontend, modular monolith and AI-native. It measures **deterministic lexical source scans**, not actual AI-Agent success or token efficiency. These synthetic layouts are **not runnable full implementations** of the named design methodologies.
+Seven **identical source files** are copied into directory organizations inspired by Layered, AI-Native, DDD, Hexagonal, Vertical Slice, Modular Monolith, and FSD. Python times complete recursive lexical scanning. These synthetic layouts are **not full runnable pattern implementations**.
 
-Latest CI-generated measurements and presentation-ready vector charts:
+- [Report](results/latest/RESULTS.md) · [raw observations](results/latest/raw.csv) · [summary JSON](results/latest/summary.json)
+- [Scan time SVG](results/latest/discovery_time.svg) · [files opened SVG](results/latest/discovery_files.svg)
 
-- [Measured results report](results/latest/RESULTS.md)
-- [Raw repeated observations (CSV)](results/latest/raw.csv)
-- [Aggregated measurements (CSV)](results/latest/summary.csv)
-- [Machine-readable results (JSON)](results/latest/summary.json)
-- [Discovery time chart (SVG)](results/latest/discovery_time.svg)
-- [Files opened chart (SVG)](results/latest/discovery_files.svg)
-- [Benchmark workflow](.github/workflows/benchmark.yml)
-- [Blog article draft](docs/BLOG_DRAFT.md) and [portfolio paragraph](docs/PORTFOLIO_SNIPPET.md)
+### 2. Actual runnable source code, seven compositions
 
-Run locally:
+Different Java backends are paired with React sources, plus FSD frontend with Layered backend. Files, LOC and bytes differ, so timings are descriptive **not causally attributable to architecture**.
+
+- [Report](results/runnable/RESULTS.md) · [raw observations](results/runnable/raw.csv) · [summary JSON](results/runnable/summary.json)
+- [Scan time SVG](results/runnable/scan_latency.svg) · [source LOC SVG](results/runnable/source_lines.svg)
+
+Both datasets use four search terms × 100 repeats per architecture profile, with machine/time/source hashes logged.
+
+Re-run locally:
 
 ```bash
-python3 -m unittest discover -s benchmarks/tests -v
 python3 scripts/benchmark_discovery.py --repeats 100 --output results/local
+python3 scripts/benchmark_runnable.py --repeats 100 --output results/local-runnable
 ```
 
-To claim that AI agents perform better, we still need a separately controlled **real agent task benchmark** with identical models/prompts and evaluator-owned acceptance tests. See [roadmap](docs/BENCHMARK_ROADMAP.md).
+**These are not AI coding-agent measurements.** No AI model tokens, agent task completion rate, tool-call count, agent navigation time, or regression metric has been collected yet. See [agent experiment protocol](docs/EXPERIMENT.md) and [roadmap](docs/BENCHMARK_ROADMAP.md).
+
+## Publication assets
+
+- [Research blog draft: initial path-layout study](docs/BLOG_DRAFT.md)
+- [Research blog draft: runnable implementations](docs/BLOG_02_RUNNABLE_BENCHMARK.md)
+- [Portfolio text (Korean/English)](docs/PORTFOLIO_SNIPPET.md)
+- [Architecture decision record](docs/ADR-0001-domain-colocation.md)
+- [Agent instructions](AGENTS.md)
