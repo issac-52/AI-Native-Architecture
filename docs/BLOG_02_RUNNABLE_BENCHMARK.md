@@ -1,6 +1,6 @@
 # AI가 가장 잘 탐색하는 아키텍처는 무엇일까? — 실제 실행 코드 비교 실험 2편
 
-> 연구 기록 초안, 2026-11-23. 데이터: `results/runnable/summary.json` · 실측, 단 **AI Agent 실행 결과가 아님**.
+> 연구 기록 초안, 2026-11-23. **고정 실험 스냅샷:** Git commit `26930850e64a9a94254d5b9f0681bfbb5d571d6f`, UTC 07:00:35. 실측이며 **AI Agent 실행 결과가 아님**. 저장소의 `results/runnable/latest` 성격의 데이터는 재실행에 따라 달라질 수 있으므로 아래 숫자는 이 커밋에 고정함.
 
 ## 시작: 이 실험이 답하려는 질문
 
@@ -33,7 +33,7 @@ AI에게 "주문 취소 기능을 바꿔 줘"라고 하면 백엔드, 프론트�
 
 ## 실측 결과
 
-[실제 데이터 JSON](../results/runnable/summary.json) · [전체 원본 2,800개 CSV](../results/runnable/raw.csv)
+[고정 실험 JSON](https://github.com/issac-52/AI-Native-Architecture/blob/26930850e64a9a94254d5b9f0681bfbb5d571d6f/results/runnable/summary.json) · [고정 원본 2,800개 CSV](https://github.com/issac-52/AI-Native-Architecture/blob/26930850e64a9a94254d5b9f0681bfbb5d571d6f/results/runnable/raw.csv)
 
 | 구조 | 파일 수 | 코드 줄 수 | 탐색 중앙값(ms) |
 |---|---:|---:|---:|
@@ -45,9 +45,9 @@ AI에게 "주문 취소 기능을 바꿔 줘"라고 하면 백엔드, 프론트�
 | Hexagonal | 10 | 181 | 0.835692 |
 | FSD + Layered | 15 | 190 | 1.133643 |
 
-![전체 파일 탐색 시간](../results/runnable/scan_latency.svg)
+![전체 파일 탐색 시간](https://raw.githubusercontent.com/issac-52/AI-Native-Architecture/26930850e64a9a94254d5b9f0681bfbb5d571d6f/results/runnable/scan_latency.svg)
 
-![소스 코드량](../results/runnable/source_lines.svg)
+![소스 코드량](https://raw.githubusercontent.com/issac-52/AI-Native-Architecture/26930850e64a9a94254d5b9f0681bfbb5d571d6f/results/runnable/source_lines.svg)
 
 **주의:** 이 숫자는 Python이 모든 대상 소스 파일을 읽고 문자열을 검색하는 시간이다. 모델의 탐색 지연, 토큰 소비, 기능 구현 정확도, 코드 유지보수성은 측정하지 않는다. 소규모 저장소의 밀리초 미만 차이는 캐시와 실행 환경 영향도 받는다.
 
@@ -70,3 +70,7 @@ AI에게 "주문 취소 기능을 바꿔 줘"라고 하면 백엔드, 프론트�
 - [CI 결과 및 테스트 기록](https://github.com/issac-52/AI-Native-Architecture/actions)
 
 **발행 시 숫자나 결과를 갱신한 경우 본문과 그래프가 동일한 실행 회차를 가리키는지 확인할 것.**
+
+## 재실행 시 주의
+
+동일 코드라도 CI 런너 부하, 캐시, I/O 조건에 따라 밀리초 미만 검색 시간은 달라진다. 이 문서의 숫자는 **26930850e64a9a94254d5b9f0681bfbb5d571d6f** 커밋의 증거와 연결한다. 최신 측정 결과는 [별도 동적 보고서](../results/runnable/RESULTS.md)에서 확인하며, 두 실행의 숫자를 혼용하지 않는다.
