@@ -1,4 +1,4 @@
-name: Measured architecture layout benchmark
+name: Measured architecture benchmarks
 on:
   workflow_dispatch:
   push:
@@ -6,11 +6,19 @@ on:
     paths:
       - 'baseline/backend/src/**'
       - 'baseline/frontend/src/**'
+      - 'variants/**'
+      - 'domains/order/**'
+      - 'apps/api/src/**'
+      - 'apps/web/src/**'
       - 'scripts/benchmark_discovery.py'
+      - 'scripts/benchmark_runnable.py'
       - 'benchmarks/**'
       - '.github/workflows/benchmark.yml'
 permissions:
   contents: write
+concurrency:
+  group: measured-architecture-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   benchmark:
     runs-on: ubuntu-latest
@@ -22,21 +30,27 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Unit tests
+      - name: Benchmark unit tests
         run: python3 -m unittest discover -s benchmarks/tests -v
-      - name: Measure & generate reproducible CSV/JSON/SVG/Markdown
+      - name: Architectural dependency constraints
+        run: python3 scripts/validate_boundaries.py
+      - name: Byte-identical source layout benchmark
         run: python3 scripts/benchmark_discovery.py --repeats 100 --output results/latest
+      - name: Actual runnable-code lexical scan
+        run: python3 scripts/benchmark_runnable.py --repeats 100 --output results/runnable
       - uses: actions/upload-artifact@v4
         with:
-          name: measured-layout-results
-          path: results/latest/
-      - name: Save results in repository on main
+          name: architecture-benchmark-raw-data
+          path: |
+            results/latest/
+            results/runnable/
+      - name: Save measured data on main
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         continue-on-error: true
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add results/latest/
+          git add results/latest/ results/runnable/
           git diff --cached --quiet && exit 0
-          git commit -m "data: record measured layout microbenchmark [skip ci]"
+          git commit -m "data: measure synthetic and runnable source layouts [skip ci]"
           git push
