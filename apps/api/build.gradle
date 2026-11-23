@@ -1,0 +1,17 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+}
+group = 'lab.ainative'
+version = '0.1.0'
+java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }
+sourceSets {
+    main.java.srcDir '../../domains/order/backend/src/main/java'
+    test.java.srcDir '../../domains/order/tests/java'
+}
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+tasks.named('test') { useJUnitPlatform() }
