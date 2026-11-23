@@ -1,0 +1,6 @@
+domain: order
+imports: []
+publishes: []
+subscribes: []
+applications: [api, web]
+cross_domain_changes: require impact review

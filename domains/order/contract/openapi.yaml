@@ -1,0 +1,21 @@
+openapi: 3.0.3
+info: { title: Order Architecture Experiment, version: 0.1.0 }
+paths:
+  /api/orders:
+    get:
+      operationId: listOrders
+      responses:
+        '200': { description: Array of orders }
+    post:
+      operationId: createOrder
+      responses:
+        '201': { description: Created order }
+        '400': { description: Validation error }
+  /api/orders/{id}/cancel:
+    post:
+      operationId: cancelOrder
+      parameters:
+        - { in: path, name: id, required: true, schema: { type: integer } }
+      responses:
+        '200': { description: Cancelled order }
+        '404': { description: Unknown order }

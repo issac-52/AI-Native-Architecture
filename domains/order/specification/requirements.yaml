@@ -1,0 +1,7 @@
+domain: order
+purpose: Create, list and cancel orders
+operations:
+  create: { input: "productName nonblank, quantity integer >= 1", output: "201 with created order" }
+  list: { output: "200 with orders in ascending id order" }
+  cancel: { input: "existing order id", output: "200 with CANCELLED status" }
+non_goals: [payments, inventory, authentication, persistence]

@@ -1,0 +1,7 @@
+domain: order
+invariants:
+  - { id: QUANTITY_POSITIVE, rule: "quantity >= 1", check: "0 -> HTTP 400" }
+  - { id: NAME_REQUIRED, rule: "nonblank productName", check: "blank -> HTTP 400" }
+  - { id: CANCEL_IDEMPOTENT, rule: "repeated cancel stays CANCELLED", check: "two cancel requests -> HTTP 200" }
+  - { id: UNKNOWN_ORDER, rule: "unknown id must not be fabricated", check: "unknown cancel -> HTTP 404" }
+storage: memory_only

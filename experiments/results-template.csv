@@ -1,0 +1,1 @@
+trial_id,task_id,variant,model_version,base_commit,prompt_sha256,success,regressions,cross_scope_files,tokens_in,tokens_out,wall_seconds,tool_calls,human_interventions,tests_executed,notes
