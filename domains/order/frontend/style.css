@@ -1,0 +1,12 @@
+:root { font-family: Inter, system-ui, sans-serif; color: #e5e7eb; background: #0b1220; font-synthesis: none; }
+* { box-sizing: border-box; } body { margin: 0; } main { width: min(760px, 94%); margin: 48px auto; }
+header { margin-bottom: 36px; } h1 { font-size: 2.6rem; margin: 8px 0; } h2 { margin: 0 0 18px; font-size: 1.25rem; }
+p, small { color: #aeb9ca; }.eyebrow { color: #82d6cd; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
+section { background: #182338; border: 1px solid #2b3a51; border-radius: 14px; padding: 22px; margin-bottom: 20px; }
+form { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; } label { display: grid; gap: 7px; flex: 1; min-width: 145px; font-size: .85rem; }
+input { width: 100%; background: #0b1220; color: white; border: 1px solid #41516b; border-radius: 8px; padding: 11px; }
+button { border: none; border-radius: 8px; padding: 11px 18px; color: #09171c; background: #8ae6d6; cursor: pointer; font-weight: 700; }
+button:disabled { opacity: .4; cursor: default; }.secondary { background: #3b4e6b; color: white; }
+.heading { display: flex; justify-content: space-between; align-items: center; }
+ul { padding: 0; margin: 0; list-style: none; } li { padding: 12px 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid #334155; }
+small { display: block; margin-top: 6px; }.error { color: #ffb3b3; background: #451e2a; padding: 12px; border-radius: 8px; }
