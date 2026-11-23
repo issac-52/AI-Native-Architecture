@@ -3,24 +3,24 @@
 <text x="30" y="42" fill="#f8fafc" font-family="Arial,sans-serif" font-size="22" font-weight="bold">Runnable source: full lexical scan</text>
 <text x="30" y="63" fill="#94a3b8" font-family="Arial,sans-serif" font-size="12">Different source sizes. Not an AI-agent speed comparison.</text>
 <text x="24" y="107.0" fill="#cbd5e1" font-family="Arial,sans-serif" font-size="15">ai_native</text>
-<rect x="240" y="89.0" width="333.9" height="25" rx="4" fill="#52b8ad"/>
-<text x="581.9" y="107.0" fill="#f8fafc" font-family="Arial,sans-serif" font-size="14">0.549 ms</text>
+<rect x="240" y="89.0" width="305.1" height="25" rx="4" fill="#52b8ad"/>
+<text x="553.1" y="107.0" fill="#f8fafc" font-family="Arial,sans-serif" font-size="14">0.389 ms</text>
 <text x="24" y="153.6" fill="#cbd5e1" font-family="Arial,sans-serif" font-size="15">ddd</text>
-<rect x="240" y="135.6" width="361.9" height="25" rx="4" fill="#52b8ad"/>
-<text x="609.9" y="153.6" fill="#f8fafc" font-family="Arial,sans-serif" font-size="14">0.595 ms</text>
+<rect x="240" y="135.6" width="348.3" height="25" rx="4" fill="#52b8ad"/>
+<text x="596.3" y="153.6" fill="#f8fafc" font-family="Arial,sans-serif" font-size="14">0.444 ms</text>
 <text x="24" y="200.1" fill="#cbd5e1" font-family="Arial,sans-serif" font-size="15">fsd_frontend</text>
 <rect x="240" y="182.1" width="690.0" height="25" rx="4" fill="#52b8ad"/>
-<text x="938.0" y="200.1" fill="#f8fafc" font-family="Arial,sans-serif" font-size="14">1.134 ms</text>
+<text x="938.0" y="200.1" fill="#f8fafc" font-family="Arial,sans-serif" font-size="14">0.879 ms</text>
 <text x="24" y="246.7" fill="#cbd5e1" font-family="Arial,sans-serif" font-size="15">hexagonal</text>
-<rect x="240" y="228.7" width="508.6" height="25" rx="4" fill="#52b8ad"/>
-<text x="756.6" y="246.7" fill="#f8fafc" font-family="Arial,sans-serif" font-size="14">0.836 ms</text>
+<rect x="240" y="228.7" width="499.7" height="25" rx="4" fill="#52b8ad"/>
+<text x="747.7" y="246.7" fill="#f8fafc" font-family="Arial,sans-serif" font-size="14">0.637 ms</text>
 <text x="24" y="293.3" fill="#cbd5e1" font-family="Arial,sans-serif" font-size="15">layered</text>
-<rect x="240" y="275.3" width="304.6" height="25" rx="4" fill="#52b8ad"/>
-<text x="552.6" y="293.3" fill="#f8fafc" font-family="Arial,sans-serif" font-size="14">0.500 ms</text>
+<rect x="240" y="275.3" width="287.4" height="25" rx="4" fill="#52b8ad"/>
+<text x="535.4" y="293.3" fill="#f8fafc" font-family="Arial,sans-serif" font-size="14">0.366 ms</text>
 <text x="24" y="339.9" fill="#cbd5e1" font-family="Arial,sans-serif" font-size="15">modular_monolith</text>
-<rect x="240" y="321.9" width="325.4" height="25" rx="4" fill="#52b8ad"/>
-<text x="573.4" y="339.9" fill="#f8fafc" font-family="Arial,sans-serif" font-size="14">0.535 ms</text>
+<rect x="240" y="321.9" width="309.4" height="25" rx="4" fill="#52b8ad"/>
+<text x="557.4" y="339.9" fill="#f8fafc" font-family="Arial,sans-serif" font-size="14">0.394 ms</text>
 <text x="24" y="386.4" fill="#cbd5e1" font-family="Arial,sans-serif" font-size="15">vertical_slice</text>
-<rect x="240" y="368.4" width="323.6" height="25" rx="4" fill="#52b8ad"/>
-<text x="571.6" y="386.4" fill="#f8fafc" font-family="Arial,sans-serif" font-size="14">0.532 ms</text>
+<rect x="240" y="368.4" width="307.3" height="25" rx="4" fill="#52b8ad"/>
+<text x="555.3" y="386.4" fill="#f8fafc" font-family="Arial,sans-serif" font-size="14">0.391 ms</text>
 </svg>

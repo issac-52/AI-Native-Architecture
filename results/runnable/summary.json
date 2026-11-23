@@ -1,6 +1,6 @@
 {
   "type": "real_runnable_code_lexical_scan_NOT_AI",
-  "measured_at_utc": "2026-11-23T07:00:35.824182+00:00",
+  "measured_at_utc": "2026-11-23T07:07:06.093632+00:00",
   "platform": "Linux-7.0.0-1020-azure-x86_64-with-glibc2.43",
   "python": "3.12.16",
   "seed": 20261123,
@@ -14,7 +14,7 @@
   "profiles": [
     {
       "profile": "ai_native",
-      "median_of_query_medians_ms": 0.548593,
+      "median_of_query_medians_ms": 0.388591,
       "source_sha256": "76a053102f77944ed31a56b81da9e922691089bc4a35c2baeda9df9e5ce77d99",
       "source_files": 6,
       "source_lines": 156,
@@ -28,7 +28,7 @@
     },
     {
       "profile": "ddd",
-      "median_of_query_medians_ms": 0.594622,
+      "median_of_query_medians_ms": 0.443695,
       "source_sha256": "29b4f54b3db1e921d67d133c314867a070c3a0d5f07d8f4999449eb1830592d6",
       "source_files": 8,
       "source_lines": 158,
@@ -40,7 +40,7 @@
     },
     {
       "profile": "fsd_frontend",
-      "median_of_query_medians_ms": 1.133643,
+      "median_of_query_medians_ms": 0.878875,
       "source_sha256": "9cac7c67acd010ff75c0055a85f36446c9c6aa78bbd6982e4de59664dac4ce62",
       "source_files": 15,
       "source_lines": 190,
@@ -52,7 +52,7 @@
     },
     {
       "profile": "hexagonal",
-      "median_of_query_medians_ms": 0.835692,
+      "median_of_query_medians_ms": 0.636541,
       "source_sha256": "6eb815d48dbd48e09816bbfbf92d3b998db539fb84e3d630829bb2e45c91dd89",
       "source_files": 10,
       "source_lines": 181,
@@ -64,7 +64,7 @@
     },
     {
       "profile": "layered",
-      "median_of_query_medians_ms": 0.500461,
+      "median_of_query_medians_ms": 0.366111,
       "source_sha256": "eb4f71fc7bcd7375f69ba9fc402bad7f4d7e24506db2ebe04c019ad28bc6e510",
       "source_files": 7,
       "source_lines": 175,
@@ -76,7 +76,7 @@
     },
     {
       "profile": "modular_monolith",
-      "median_of_query_medians_ms": 0.534567,
+      "median_of_query_medians_ms": 0.394139,
       "source_sha256": "1bcfaa6893289b6daf9bc76833d03f70ab4fa30298176d838e6f9ce47d9055fd",
       "source_files": 8,
       "source_lines": 150,
@@ -88,7 +88,7 @@
     },
     {
       "profile": "vertical_slice",
-      "median_of_query_medians_ms": 0.53162,
+      "median_of_query_medians_ms": 0.391433,
       "source_sha256": "afae09a9b0f0ad1cf622de30d11f685ec374ae320564496e0a5ded4b742a9c6e",
       "source_files": 8,
       "source_lines": 157,

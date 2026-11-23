@@ -2,7 +2,7 @@
 
 > **NOT AI performance evidence.** Identical source bytes, different paths; full lexical file scans.
 
-- UTC: 2026-11-23T07:00:34.145192+00:00
+- UTC: 2026-11-23T07:07:04.833503+00:00
 - Platform: Linux-7.0.0-1020-azure-x86_64-with-glibc2.43
 - Source SHA-256: \`001ec0f47b659cc23692c0d556f87814ba561377c180dcd12e41b21b427de104\`
 - Repetitions per profile/query: 100
@@ -10,13 +10,13 @@
 
 | Profile | Median of query medians (ms) | Files opened | Bytes read |
 |---|---:|---:|---:|
-| ai_native | 0.437897 | 7 | 6531 |
-| ddd_context | 0.560976 | 7 | 6531 |
-| fsd_frontend | 0.559676 | 7 | 6531 |
-| hexagonal | 0.683889 | 7 | 6531 |
-| layered | 0.464687 | 7 | 6531 |
-| modular_monolith | 0.591999 | 7 | 6531 |
-| vertical_slice | 0.467710 | 7 | 6531 |
+| ai_native | 0.325887 | 7 | 6531 |
+| ddd_context | 0.423498 | 7 | 6531 |
+| fsd_frontend | 0.422023 | 7 | 6531 |
+| hexagonal | 0.520175 | 7 | 6531 |
+| layered | 0.348328 | 7 | 6531 |
+| modular_monolith | 0.446348 | 7 | 6531 |
+| vertical_slice | 0.351126 | 7 | 6531 |
 
 ![Discovery latency](discovery_time.svg)
 
