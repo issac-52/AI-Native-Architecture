@@ -1,39 +1,38 @@
-# Next steps for a defensible research benchmark
+# Architecture benchmarking roadmap (2026-11-23)
 
-## Stage 0 — complete
-- Two runnable reference applications: layer-oriented and domain-centered, same order API.
-- Seven synthetic **path-layout proxy** fixtures using byte-identical source files.
-- Automated lexical scans with recorded repeated observations.
-- Repo-backed CSV, JSON and SVG reports.
-- A CI mechanism that archives results and attempts to commit `results/latest/`.
+## Stage 0 — complete: controlled lexical path experiment
+- Identical source content in seven synthetic path layouts.
+- Four queries × 100 repetitions/profile; 2,800 raw observations.
+- CSV/JSON/Markdown/SVG artifacts archived by GitHub Actions.
 
-## Stage 1 — upcoming
-Build truly runnable implementations, starting with:
-- Java Hexagonal: application port interfaces, inbound/outbound adapters, in-memory repository implementing an outbound port; dependency tests.
-- Java DDD: bounded context, meaningful Order aggregate + domain rules, application service, persistence adapter.
-- React FSD: distinct `app`, `pages`, `features`, `entities`, `shared` slices with public APIs and dependency lint rules.
-- Vertical Slice: order create/list/cancel use-case slices with request handlers.
-- Modular Monolith: modules with enforced boundaries and one process.
-- AI-Native: manifest and domain-local FE/BE with validated dependency graph.
+## Stage 1 — first implementations complete, deeper conformance pending
+- Six runnable Spring Boot API profiles: Layered, AI-Native, DDD, Hexagonal, Vertical Slice, Modular Monolith.
+- Three runnable React builds: conventional, AI-Native, Feature-Sliced Design.
+- Shared JUnit HTTP contract suite across all six backends.
+- Basic dependency boundary checks for DDD/Hexagonal/FSD/Modular.
+- Actual runnable-code lexical scans, with separately archived CSV/JSON/SVG.
+- **Not complete:** cross-domain contracts, deeper modular-boundary enforcement, realistic domain complexity, rich DDD value objects and event flows.
 
-These should all pass the same end-to-end acceptance contract without being artificially forced into a single architectural category. A combined matrix (e.g. DDD + Hexagonal + FSD) is more meaningful than “winner takes all”.
+## Stage 2a — pilot harness built; real Codex measurements pending
+- `scripts/agent_discovery_trial.py` builds isolated Git fixtures with only the assigned architecture.
+- Uses Codex `exec --json --sandbox read-only` with a pinned model and identical prompt.
+- Pre-registered T01 minimum source-file loci; reports precision/recall, wall time, tokens and tool calls.
+- Tests validate scoring, event parsing and fixture isolation **without making model calls**.
+- Actual authenticated Codex trial execution has not occurred in this project session. Local authentication is required, and model usage may incur charges.
+- Data remains local in gitignored `results/agent-local/` until reviewed for publication.
 
-## Stage 2 — real AI-Agent trials
-- Freeze Git commit and model + tooling versions.
-- Same task prompts (experiments/tasks.md), same budget and permissions.
-- Fresh environment and randomized order; >=3 attempts per task/profile.
-- Capture structured tool logs, input/output tokens, wall time and exit status.
-- Hold acceptance tests separately, under evaluator control.
-- Use human review only for specified risk gates, not to quietly repair outputs.
-- Analyze success probability, regression, files changed outside expected scope, tokens and latency.
-- Separately vary architecture, documentation and search/index tooling to control confounds.
+## Stage 2b — not yet started: autonomous implementation benchmark
+- Freeze versioned, independent evaluator-owned tests for each task in `experiments/tasks.md`.
+- Compare identical task prompts, pinned model/reasoning/tool settings, budgets, fresh fixtures, randomized order and >=3 trials/profile.
+- Measure accepted task completion, regressions, external file modifications, time, tokens and interventions.
+- Separate layout effects from agent instructions (e.g. 2×2 experiment); do not use mere path-layout proxy timings as evidence.
 
-## Stage 3 — scale and cross-domain complexity
-- Order + payment + inventory with failures, idempotency and event contracts.
-- 10x and 100x generated *behavioral* complexity only after equivalent implementations exist.
-- Report uncertainty and avoid claiming generalizable speedups from one small project.
+## Stage 3 — cross-domain scale
+- Implement order/payment/inventory domain interactions with idempotency and deliberately injected failure.
+- Add 10×/100× realistic source-tree complexity after maintaining equivalent business functionality.
+- Report uncertainty, repeated samples and limitations; do not infer general architecture superiority from one demonstration.
 
-## Stage 4 — publish
-- Export raw trials with environment and frozen version IDs.
-- Generate comparative SVG/CSV and audit-ready Markdown.
-- Blog and portfolio must link raw evidence, describe limitations and distinguish baseline measurements from agent experiments.
+## Stage 4 — public portfolio and article
+- Publish raw and processed evidence with Git SHA, source fingerprints and environment versions.
+- Create blog/portfolio artifacts with precise evidence claims.
+- Distinguish lexical search, read-only agent file discovery, and autonomous code-edit success as **three independent findings**.
